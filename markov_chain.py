@@ -29,30 +29,28 @@ def markov_chain(n, N):
     p /= p.sum()
     #creates nxn P matrix of random wavlues
     P = np.random.rand(n,n)
-    P /= P.sum()
-    #computes transiton for N
-    for j in range(N):
-        p = np.dot(P.T, p)
+    #makes all entries in each row sum to one
+    P /= P.sum(1, keepdims=True)
     #computes eigenvector for largest eigenvalue in PT
     val, vect = np.linalg.eig(P.T)
     vect = vect[:,np.argmax(val)]
     #Rescales entries so sum is equal to one
     p_stationary = vect/vect.sum()
     diff = 0
+    #creates array to store difference of norms
+    y = []
     #computes norm of p-p_stationary
     for i in range(N):
+        #calculates p after transitioning N times
+        p = np.dot(P.T, p)
         diff = np.linalg.norm(np.subtract(p, p_stationary))
+        #stores norms in y array
+        y.append(diff)
     #plot norms against i
     x = np.linspace(0, N, N)
-    y = np.linspace(0, diff, N)
     plt.plot(x, y)
-    #create something to check if diff diminishes as iterations increase
-    print(diff)
- 
+
 #test markov_chain function for different values of n and N
 markov_chain(n=5, N=50)
-markov_chain(n=10, N=50)
 markov_chain(n=5, N=55)
-markov_chain(n=20, N=55)
-markov_chain(n=5, N=70)
-
+markov_chain(n=5, N=60)
