@@ -1,4 +1,4 @@
-# HW_4
+# Mandelbrot-Markov_AMS325-HW4
 There are two files in this respository.
 The first one is mandelbrot.py. These can be ran in Spyder or another Python IDE and this file creates and plots a Mandelbrot fractal. It can be tested by calling the mandelbrot function and running through three arguments: n, N_max, threshold. This determines the size of the set, the number of iterations the set will check for, and the limits that determine whether or not a point is in the Mandelbrot fractal.
 
